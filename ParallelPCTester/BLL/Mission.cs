@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ParallelPCTester.BLL;
 
-[Obsolete]
+[Obsolete("旧方法，已经淘汰",true)]
 internal class Mission
 {
     private Queue<MotorActionParam[]> AllActions;

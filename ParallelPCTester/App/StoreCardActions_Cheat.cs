@@ -1,25 +1,29 @@
-﻿using ParallelPCTester.BLL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ParallelPCTester.BLL;
 using ParallelPCTester.Entity;
 using static ParallelPCTester.BLL.MotorParamBuilder;
 
 namespace ParallelPCTester.App;
-internal class StoreBookActions_Cheat : ActionBuilder
+internal class StoreCardActions_Cheat : ActionBuilder
 {
-    public StoreBookActions_Cheat(int row, int col, bool iscard, bool istop) : base(row, col, iscard, istop)
+    public StoreCardActions_Cheat(int row, int col, bool iscard, bool istop) : base(row, col, iscard, istop)
     {
     }
-
     protected override void BuildActions()
     {
         var step1 = new DAGNode(MoveTo(MotorAddress.BigRotate, col, iscard, istop));
-        var step2 = new DAGNode(Roll(MotorAddress.Roll, RollType.BookIn));
-        Root.AddChildren(step1, step2);
+        
+        var step0_1 = new DAGNode(MoveToSpec(MotorAddress.Lift, LiftSpecPosType.CardEntrance));
+        var step0_2 = new DAGNode(MoveToSpec(MotorAddress.ScrewLead, ScrewLeadPosType.CardEntrance));
+
+        Root.AddChildren(step0_1, step0_2, step1);
+
+        var step2 = new DAGNode(Roll(MotorAddress.Roll, RollType.CardIn));
+        step2.AddDependencies(step0_1, step0_2);
 
         var step3 = new DAGNode(ClawAction(MotorAddress.Claw, ClawActionType.Close));
         step3.AddDependencies(step2);
@@ -40,10 +44,10 @@ internal class StoreBookActions_Cheat : ActionBuilder
         var step8 = new DAGNode(MoveToSpec(MotorAddress.SmallRotate, SmallRoatePosType.CasePos));
         step8.AddDependencies(step_cheat1);
 
-        var step9 = new DAGNode(MoveToSpec(MotorAddress.ScrewLead, ScrewLeadPosType.BookStore));
+        var step9 = new DAGNode(MoveToSpec(MotorAddress.ScrewLead, ScrewLeadPosType.CardStore));
         step9.AddDependencies(step8);
 
-        var step10 = new DAGNode(ClawAction(MotorAddress.Claw, ClawActionType.HalfOpen));
+        var step10 = new DAGNode(ClawAction(MotorAddress.Claw, ClawActionType.MicroOpen));
         step10.AddDependencies(step9);
 
         var step_cheat2 = new DAGNode(new DelayAction(DelayAction.CheatTimes[1]));

@@ -28,11 +28,20 @@ internal static class ActionBuilderFactory
                 else
                     return new StoreBookActions(row, col, iscard, istop);
             case (false, true, false):
-                return new PickBookActions(row, col, iscard, istop);
+                if(ischeat)
+                    return new PickBookActions_Cheat(row, col, iscard, istop);
+                else
+                    return new PickBookActions(row, col, iscard, istop);
             case (false, false, true):
-                return new StoreCardActions(row, col, iscard, istop);
+                if (ischeat)
+                    return new StoreCardActions_Cheat(row, col, iscard, istop);
+                else
+                    return new StoreCardActions(row, col, iscard, istop);
             case (false, true, true):
-                return new PickCardActions(row, col, iscard, istop);
+                if (ischeat)
+                    return new PickCardActions_Cheat(row, col, iscard, istop);
+                else
+                    return new PickCardActions(row, col, iscard, istop);
 
             default:
                 throw new NotImplementedException("The mission type is not implemented");

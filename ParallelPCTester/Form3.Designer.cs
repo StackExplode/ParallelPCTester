@@ -43,7 +43,7 @@ partial class Form3
         textBox1.ReadOnly = true;
         textBox1.Size = new Size(226, 312);
         textBox1.TabIndex = 0;
-        textBox1.Text = "存证时升降对准修正预估时间:\r\n存证时无条件下沉预估时间:";
+        textBox1.Text = "存证时升降对准修正预估时间:\r\n存证时无条件下沉预估时间:\r\n取证时开头三合一时间预估:\r\n存证时丝杆从格口抽出时间预估:";
         textBox1.TextAlign = HorizontalAlignment.Right;
         // 
         // button1
