@@ -64,7 +64,7 @@ namespace ParallelPCTester
             rad_sc.Tag = MissionType.IsCard;
             rad_pb.Tag = MissionType.IsPick;
             rad_pc.Tag = MissionType.IsCard | MissionType.IsPick;
-
+            rad_batch.Tag = MissionType.IsBatch;
         }
 
         private MissionType GetMissionType()

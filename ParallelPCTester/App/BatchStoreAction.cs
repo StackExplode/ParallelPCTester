@@ -1,25 +1,27 @@
-﻿using ParallelPCTester.BLL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ParallelPCTester.BLL;
 using ParallelPCTester.Entity;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static ParallelPCTester.BLL.MotorParamBuilder;
 
 namespace ParallelPCTester.App;
-internal class StoreBookActions_Cheat : ActionBuilder
+internal class BatchStoreAction : ActionBuilder
 {
-    public StoreBookActions_Cheat(int row, int col, bool iscard, bool istop) : base(row, col, iscard, istop)
+    public BatchStoreAction(int row, int col, bool iscard, bool istop) : base(row, col, iscard, istop)
     {
     }
-
     protected override void BuildActions()
     {
+        var step0 = new DAGNode(MoveToSpec(MotorAddress.Lift, LiftSpecPosType.BatchEntrance));
+        Root.AddChildren(step0);
+
         var step1 = new DAGNode(MoveTo(MotorAddress.BigRotate, col, iscard, istop));
-        var step2 = new DAGNode(Roll(MotorAddress.Roll, RollType.BookIn));
-        Root.AddChildren(step1, step2);
+        var step2 = new DAGNode(Roll(MotorAddress.Roll, RollType.Batch));
+        step0.AddChildren(step1, step2);
 
         var step3 = new DAGNode(ClawAction(MotorAddress.Claw, ClawActionType.Close));
         step3.AddDependencies(step2);
@@ -34,11 +36,8 @@ internal class StoreBookActions_Cheat : ActionBuilder
         var step7 = new DAGNode(LiftAim(row, iscard, istop));
         step7.AddDependencies(step1, step5, step6);
 
-        var step_cheat1 = new DAGNode(new DelayAction(DelayAction.CheatTimes[0]));
-        step_cheat1.AddDependencies(step1, step5, step6);
-
         var step8 = new DAGNode(MoveToSpec(MotorAddress.SmallRotate, SmallRoatePosType.CasePos));
-        step8.AddDependencies(step_cheat1);
+        step8.AddDependencies(step7);
 
         var step9 = new DAGNode(MoveToSpec(MotorAddress.ScrewLead, ScrewLeadPosType.BookStore));
         step9.AddDependencies(step8);
@@ -46,24 +45,19 @@ internal class StoreBookActions_Cheat : ActionBuilder
         var step10 = new DAGNode(ClawAction(MotorAddress.Claw, ClawActionType.HalfOpen));
         step10.AddDependencies(step9);
 
-        var step_cheat2 = new DAGNode(new DelayAction(DelayAction.CheatTimes[1]));
-        step_cheat2.AddDependencies(step10);
-
         var step11 = new DAGNode(LiftSink(iscard));
         step11.AddDependencies(step10);
 
         var step12 = new DAGNode(MoveToSpec(MotorAddress.ScrewLead, ScrewLeadPosType.FullBack));
-        step12.AddDependencies(step_cheat2);
-
-        var step_cheat3 = new DAGNode(new DelayAction(DelayAction.CheatTimes[3]));
-        step_cheat3.AddDependencies(step_cheat2);
+        step12.AddDependencies(step11);
 
         var step13 = new DAGNode(MoveToSpec(MotorAddress.SmallRotate, SmallRoatePosType.DoorPos));
         var step14 = new DAGNode(MoveToSpec(MotorAddress.Lift, LiftSpecPosType.BookEntrance));
         var step15 = new DAGNode(ClawAction(MotorAddress.Claw, ClawActionType.BigOpen));
-        step_cheat3.AddChildren(step13, step14, step15);
+        step12.AddChildren(step13, step14, step15);
 
         var step16 = new DAGNode(MoveToSpec(MotorAddress.ScrewLead, ScrewLeadPosType.BookEntrance));
         step16.AddDependencies(step15);
+
     }
 }

@@ -17,11 +17,11 @@ internal class PickBookActions : ActionBuilder
     protected override void BuildActions()
     {
         var step1 = new DAGNode(MoveTo(MotorAddress.BigRotate, col, iscard, istop));
-        var step2 = new DAGNode(LiftFastMove(row, iscard));
+        var step2 = new DAGNode(LiftFastMove(row, iscard, istop));
         var step3 = new DAGNode(MoveToSpec(MotorAddress.SmallRotate, SmallRoatePosType.LaserPos));
         Root.AddChildren(step1, step3, step2);
 
-        var step4 = new DAGNode(LiftAim(row, iscard));
+        var step4 = new DAGNode(LiftAim(row, iscard,istop));
         step4.AddDependencies(step1, step2, step3);
 
         var step5 = new DAGNode(LiftSink(iscard));

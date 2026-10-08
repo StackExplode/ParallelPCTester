@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -28,7 +29,7 @@ internal static class EnumExtender
         return Convert.ToInt32(value);
     }
 
-    public static string? GetDescription(this Enum value)
+    public static string? GetDescription<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]  T>(this T value) where T:Enum
     {
         var field = value.GetType().GetField(value.ToString());
         var attr = field.GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), false).FirstOrDefault() as System.ComponentModel.DescriptionAttribute;

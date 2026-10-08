@@ -48,22 +48,24 @@ internal static class MotorParamBuilder
             [0x06, (ushort)(rollnum & 0x0F), (ushort)(rollnum >> 4)]);
     }
 
-    public static MotorActionParam LiftFastMove(ushort pos, bool iscard)
+    public static MotorActionParam LiftFastMove(ushort pos, bool iscard, bool istop)
     {
         MotorAddress motor = MotorAddress.Lift;
+        if (istop)
+            pos--;
         string cardstr = iscard ? "卡格口" : "证格口";
         return new MotorActionParam($"{motor.GetDescription()}快速运动到{pos}号位置而不对准({cardstr})",
             motor,
             [0x03, pos, 0, 0, (ushort)(iscard ? 31 : 30)]);
     }
 
-    public static MotorActionParam LiftAim(ushort pos, bool iscard)
+    public static MotorActionParam LiftAim(ushort pos, bool iscard, bool istop)
     {
         MotorAddress motor = MotorAddress.Lift;
         string cardstr = iscard ? "卡格口" : "证格口";
         return new MotorActionParam($"{motor.GetDescription()}单独对准({cardstr})",
             motor,
-            [0x03, pos, 0, 0, (ushort)(iscard ? 41 : 40)]);
+            [0x03, pos, 0, 0, (ushort)(iscard ? (istop ? 45 : 41) : 40)]);
     }
 
     public static MotorActionParam LiftSink(bool iscard)

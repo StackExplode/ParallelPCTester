@@ -5,14 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ParallelPCTester.Entity;
-
-[Flags]
-internal enum MissionType
+internal class Config
 {
-    IsCard = 1,
-    IsTop = 1<<1,
-    IsPick = 1<<2,
-    IsBackZero = 1<<3,
-    IsCheat = 1 << 4,
-    IsBatch = 1<<5,
+    public string? Name { get; set; }
+    public int? Value { get; set; }
 }

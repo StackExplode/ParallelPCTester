@@ -35,7 +35,7 @@ public partial class Form2 : Form
         {
             await Task.Delay(20);
             var para = MotorParamBuilder.MoveToSpec(MotorAddress.ScrewLead, (ScrewLeadPosType)pos);
-            MotorAction m = new MotorAction(para); 
+            MotorAction m = new MotorAction(para);
             m.SetEnvironment(env);
             var rt = await m.ExcuteStep();
             if (rt != ErrorType.NoError)
@@ -75,5 +75,11 @@ public partial class Form2 : Form
         await modbus.WriteRegs4x(8, 400, [0x02, 0x00]);
         await modbus.WriteRegs4x(8, 500, [0xA5, 0xA5]);
         button4.Enabled = true;
+    }
+
+    private void button5_Click(object sender, EventArgs e)
+    {
+        Config cfg = JSONParserHelper.ParseFile<Config>("config.json");
+        MessageBox.Show($"Name={cfg.Name},Value={cfg.Value}");
     }
 }

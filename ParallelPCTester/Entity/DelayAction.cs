@@ -8,10 +8,10 @@ namespace ParallelPCTester.Entity;
 internal class DelayAction : IAction
 {
     public static int[] CheatTimes = [
-        3000    //0.存证时升降对准
-        ,1500   //1.存证时无条件下沉
-        ,2000   //2.取证时半开、小旋转、下沉三合一动作
-        ,800    //3.存证或取证时丝杆抽出格口
+        5    //0.存证时升降对准
+        ,5   //1.存证时无条件下沉
+        ,5   //2.取证时半开、小旋转、下沉三合一动作
+        ,5    //3.存证或取证时丝杆抽出格口
         ];
     private int delayms;
     public string Description => $"阻塞延时等待{delayms}毫秒";

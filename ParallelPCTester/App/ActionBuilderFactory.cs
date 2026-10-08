@@ -18,6 +18,11 @@ internal static class ActionBuilderFactory
 
         bool ischeat = type.HasFlag(MissionType.IsCheat);
 
+        if(type.HasFlag(MissionType.IsBatch))
+        {
+            return new BatchStoreAction(row, col, iscard, istop);
+        }
+
         switch ((isbackzero, ispick, iscard))
         {
             case (true, _, _):

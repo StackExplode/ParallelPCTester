@@ -32,10 +32,10 @@ internal class StoreCardActions_Cheat : ActionBuilder
         step4.AddDependencies(step3);
 
         var step5 = new DAGNode(MoveToSpec(MotorAddress.SmallRotate, SmallRoatePosType.LaserPos));
-        var step6 = new DAGNode(LiftFastMove(row, iscard));
+        var step6 = new DAGNode(LiftFastMove(row, iscard, istop));
         step4.AddChildren(step5, step6);
 
-        var step7 = new DAGNode(LiftAim(row, iscard));
+        var step7 = new DAGNode(LiftAim(row, iscard, istop));
         step7.AddDependencies(step1, step5, step6);
 
         var step_cheat1 = new DAGNode(new DelayAction(DelayAction.CheatTimes[0]));

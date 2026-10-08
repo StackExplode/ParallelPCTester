@@ -63,6 +63,7 @@
             txt_rst = new RichTextBox();
             pictureBox1 = new PictureBox();
             linkLabel1 = new LinkLabel();
+            rad_batch = new RadioButton();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)num_row).BeginInit();
@@ -192,7 +193,7 @@
             button2.BackColor = Color.DarkGray;
             button2.Font = new Font("Segoe UI", 19.5F);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(5, 233);
+            button2.Location = new Point(7, 257);
             button2.Name = "button2";
             button2.Size = new Size(157, 49);
             button2.TabIndex = 1;
@@ -217,14 +218,14 @@
             groupBox2.Enabled = false;
             groupBox2.Location = new Point(12, 230);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(169, 288);
+            groupBox2.Size = new Size(169, 316);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "Action";
             // 
             // num_row
             // 
-            num_row.Location = new Point(116, 147);
+            num_row.Location = new Point(118, 171);
             num_row.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             num_row.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             num_row.Name = "num_row";
@@ -234,7 +235,7 @@
             // 
             // num_col
             // 
-            num_col.Location = new Point(34, 147);
+            num_col.Location = new Point(36, 171);
             num_col.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             num_col.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             num_col.Name = "num_col";
@@ -245,6 +246,7 @@
             // panel1
             // 
             panel1.BackColor = Color.Transparent;
+            panel1.Controls.Add(rad_batch);
             panel1.Controls.Add(linkLabel2);
             panel1.Controls.Add(chk_cheat);
             panel1.Controls.Add(rad_sc);
@@ -254,13 +256,13 @@
             panel1.Controls.Add(rad_sb);
             panel1.Location = new Point(0, 13);
             panel1.Name = "panel1";
-            panel1.Size = new Size(169, 98);
+            panel1.Size = new Size(169, 122);
             panel1.TabIndex = 5;
             // 
             // linkLabel2
             // 
             linkLabel2.AutoSize = true;
-            linkLabel2.Location = new Point(88, 77);
+            linkLabel2.Location = new Point(87, 101);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(78, 15);
             linkLabel2.TabIndex = 2;
@@ -272,7 +274,7 @@
             // 
             chk_cheat.AutoSize = true;
             chk_cheat.ForeColor = Color.Fuchsia;
-            chk_cheat.Location = new Point(6, 76);
+            chk_cheat.Location = new Point(5, 100);
             chk_cheat.Name = "chk_cheat";
             chk_cheat.Size = new Size(79, 19);
             chk_cheat.TabIndex = 1;
@@ -333,7 +335,7 @@
             // 
             // txt_qspan
             // 
-            txt_qspan.Location = new Point(101, 204);
+            txt_qspan.Location = new Point(103, 228);
             txt_qspan.Name = "txt_qspan";
             txt_qspan.Size = new Size(61, 23);
             txt_qspan.TabIndex = 4;
@@ -341,7 +343,7 @@
             // 
             // txt_atimeout
             // 
-            txt_atimeout.Location = new Point(101, 175);
+            txt_atimeout.Location = new Point(103, 199);
             txt_atimeout.Name = "txt_atimeout";
             txt_atimeout.Size = new Size(61, 23);
             txt_atimeout.TabIndex = 4;
@@ -349,7 +351,7 @@
             // 
             // txt_topcard
             // 
-            txt_topcard.Location = new Point(92, 117);
+            txt_topcard.Location = new Point(94, 141);
             txt_topcard.Name = "txt_topcard";
             txt_topcard.Size = new Size(70, 23);
             txt_topcard.TabIndex = 3;
@@ -358,7 +360,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(5, 207);
+            label9.Location = new Point(7, 231);
             label9.Name = "label9";
             label9.Size = new Size(68, 15);
             label9.TabIndex = 0;
@@ -367,7 +369,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(4, 178);
+            label8.Location = new Point(6, 202);
             label8.Name = "label8";
             label8.Size = new Size(90, 15);
             label8.TabIndex = 0;
@@ -376,7 +378,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(4, 120);
+            label10.Location = new Point(6, 144);
             label10.Name = "label10";
             label10.Size = new Size(82, 15);
             label10.TabIndex = 0;
@@ -385,7 +387,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(4, 149);
+            label4.Location = new Point(6, 173);
             label4.Name = "label4";
             label4.Size = new Size(28, 15);
             label4.TabIndex = 0;
@@ -394,7 +396,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(81, 149);
+            label3.Location = new Point(83, 173);
             label3.Name = "label3";
             label3.Size = new Size(33, 15);
             label3.TabIndex = 0;
@@ -409,7 +411,7 @@
             txt_rst.Name = "txt_rst";
             txt_rst.ReadOnly = true;
             txt_rst.ScrollBars = RichTextBoxScrollBars.Vertical;
-            txt_rst.Size = new Size(569, 488);
+            txt_rst.Size = new Size(569, 516);
             txt_rst.TabIndex = 3;
             txt_rst.Text = "";
             // 
@@ -433,11 +435,22 @@
             linkLabel1.Text = "UploadLog";
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
+            // rad_batch
+            // 
+            rad_batch.AutoSize = true;
+            rad_batch.Location = new Point(5, 78);
+            rad_batch.Name = "rad_batch";
+            rad_batch.Size = new Size(115, 19);
+            rad_batch.TabIndex = 3;
+            rad_batch.TabStop = true;
+            rad_batch.Text = "Batch Store Book";
+            rad_batch.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(768, 530);
+            ClientSize = new Size(768, 558);
             Controls.Add(linkLabel1);
             Controls.Add(pictureBox1);
             Controls.Add(txt_rst);
@@ -500,5 +513,6 @@
         private LinkLabel linkLabel1;
         private CheckBox chk_cheat;
         private LinkLabel linkLabel2;
+        private RadioButton rad_batch;
     }
 }
